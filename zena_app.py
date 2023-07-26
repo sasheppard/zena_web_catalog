@@ -7,7 +7,7 @@ streamlit.title('Zena\'s Amazing Athleisure Catalog')
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 
-my_cur.execute("SELECT color_or_style FROM catalog_for_website")
+my_cur.execute("SELECT color_or_style FROM zenas_athleisure_db.products.catalog_for_website")
 my_catalog = my_cur.fetchall()
 
 df = pd.DataFrame(my_catalog)
@@ -17,7 +17,7 @@ option = streamlit.selectbox('Pick a sweatsuit color or style:', list(color_list
 
 product_caption = 'Our warm, comfortable, ' + option + ' sweatsuit!'
 
-my_cur.execute("SELECT direct_url, price, size_list, upsell_product_desc FROM catalog_for_website WHERE color_or_style = "' + option + '";")
+my_cur.execute("SELECT direct_url, price, size_list, upsell_product_desc FROM zenas_athleisure_db.products.catalog_for_website WHERE color_or_style = "' + option + '";")
 df2 = my_cur.fetchone()
 
 streamlit.image(
