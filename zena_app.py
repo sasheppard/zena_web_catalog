@@ -7,7 +7,7 @@ streamlit.title('Zena\'s Amazing Athleisure Catalog')
 my_cnx = snowflake.connector.connect(**streamlit.secrets["snowflake"])
 my_cur = my_cnx.cursor()
 
-my_cur.execute("SELECT color_or_style FROM zenas_athleisure_db.products.catalog_for_website")
+my_cur.execute("SELECT color_or_style FROM zenas_athleisure_db.products.catalog_for_website;")
 my_catalog = my_cur.fetchall()
 
 df = pd.DataFrame(my_catalog)
